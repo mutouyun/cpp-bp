@@ -14,10 +14,19 @@
             "args": [
                 "-g",
                 "main.cpp",
-                "--std=c++14",
+                "--std=c++17",
                 "-o",
                 "\"${workspaceFolder}/${fileBasenameNoExtension}.exe\""
             ]
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "\"${workspaceFolder}/${fileBasenameNoExtension}.exe\"",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
         }
     ]
 }
