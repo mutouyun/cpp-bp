@@ -8,8 +8,9 @@ Project {
         cpp.cxxLanguageVersion: "c++17"
 
         files: [
-            "functions.hpp",
             "main.cpp",
+            "matrix.h",
+            "perceptron.h",
         ]
 
         Group {     // Properties for the produced executable
