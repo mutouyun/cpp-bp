@@ -1,34 +1,49 @@
 #pragma once
 
 #include "matrix.h"
+#include "func.h"
 
 namespace BP {
 
-template <size_t N>
+template <std::size_t N>
 class perceptron {
     vector_t<N> W_;
+    double bias_;
+
+    void adjust(vector_t<N> const & A, double delta) {
+        for (std::size_t i = 0; i < N; ++i) {
+            W_[i] += A[i] * delta;
+        }
+        bias_ += delta;
+    }
 
 public:
     perceptron() {
-        W_.fill(0.5);
+        W_.fill(1.0);
+        bias_ = 1.0;
     }
 
     auto const & W() const noexcept {
         return W_;
     }
 
+    double bias() const noexcept {
+        return bias_;
+    }
+
     template <size_t M>
-    auto train(matrix_t<M, N> const & X, vector_t<M> const & Y) {
-        auto P = sigmoid(X * W_);
-        auto P_error = Y - P;
-        auto P_delta = P_error * sigmoid_d(P);
-        auto W_delta = transpose(X) * P_delta;
-        W_ += W_delta;
-        return P;
+    void train(matrix_t<M, N> const & X, vector_t<M> const & Y) {
+        for (std::size_t i = 0; i < X.size(); ++i) {
+            double P = calc(X[i]);
+            double D = (Y[i] - P) * sigmoid_d(P);
+            adjust(X[i], D);
+        }
     }
 
     auto calc(vector_t<N> const & A) {
-        return sigmoid(matrix_t { A } * W_);
+        double sum = bias_;
+        for (double i : A * W_) sum += i;
+        return sigmoid(sum);
     }
 };
 

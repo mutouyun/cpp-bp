@@ -8,6 +8,7 @@ Project {
         cpp.cxxLanguageVersion: "c++17"
 
         files: [
+            "func.h",
             "main.cpp",
             "matrix.h",
             "perceptron.h",
