@@ -20,10 +20,13 @@ int main(void) {
         std::cout << (i + 1) << ":\tW = " << P.W() << ",\tbias = " << P.bias() << std::endl;
     }
 
+    std::cout << std::endl;
     std::cout << "Test(0  , 0  ):\tP = " << P.calc({ 0  , 0   }) << std::endl;
     std::cout << "Test(0  , 1  ):\tP = " << P.calc({ 0  , 1   }) << std::endl;
     std::cout << "Test(1  , 0  ):\tP = " << P.calc({ 1  , 0   }) << std::endl;
     std::cout << "Test(1  , 1  ):\tP = " << P.calc({ 1  , 1   }) << std::endl;
+
+    std::cout << std::endl;
     std::cout << "Test(0.2, 0.9):\tP = " << P.calc({ 0.2, 0.9 }) << std::endl;
     std::cout << "Test(0.1, 1  ):\tP = " << P.calc({ 0.1, 1   }) << std::endl;
     std::cout << "Test(1  , 0.1):\tP = " << P.calc({ 1  , 0.1 }) << std::endl;
