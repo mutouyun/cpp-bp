@@ -14,12 +14,15 @@ int main(void) {
         vector_t { 1, 1, 1 }
     };
     matrix_t Y = { 
-        vector_t { 0, 1, 1, 0 }
+        vector_t { 0, 1, 1, 1 }, // OR
+        vector_t { 0, 0, 0, 1 }, // AND
+        vector_t { 0, 1, 1, 0 }, // XOR
+        vector_t { 1, 0, 0, 1 }  // XNOR
     };
 
     network<
         matrix_t<3, 3>, // W2
-        matrix_t<3, 1>  // W1
+        matrix_t<3, 4>  // W1
     > n;
     std::cout << n << std::endl;
 

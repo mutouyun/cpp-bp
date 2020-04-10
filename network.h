@@ -20,10 +20,10 @@ public:
     }
 
     template <
-        std::size_t M,
+        std::size_t M, std::size_t N,
         template <std::size_t, std::size_t> class Mtx
     >
-    static auto train(Mtx<M, 1> const & X, Mtx<1, M> const & Y) noexcept {
+    static auto train(Mtx<M, N> const & X, Mtx<N, M> const & Y) noexcept {
         return ~Y - X;
     }
 };
@@ -59,8 +59,8 @@ public:
         return base_t::predict(sigmoid(dot(X, W_)));
     }
 
-    template <std::size_t M_, std::size_t N_>
-    auto train(Mtx<M_, N_> const & X, Mtx<1, M_> const & Y) {
+    template <std::size_t M_, std::size_t N_, std::size_t My>
+    auto train(Mtx<M_, N_> const & X, Mtx<My, M_> const & Y) {
         auto L = sigmoid(dot(X, W_));
         auto D = base_t::train(L, Y); // cross-entropy
         auto R = dot(D, ~W_) * sigmoid_d(X);
