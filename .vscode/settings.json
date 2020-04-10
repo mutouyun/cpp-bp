@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.ixx": "cpp",
         "*.bb": "shellscript",
         "functional": "cpp",
         "type_traits": "cpp",
@@ -43,6 +44,8 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "concepts": "cpp",
+        "deque": "cpp"
     }
 }
