@@ -211,13 +211,4 @@ vector_t<O> dot(vector_t<N> const & v1, matrix_t<N, O> const & m1) noexcept {
     return out;
 }
 
-template <std::size_t N>
-double dot(vector_t<N> const & v1, matrix_t<N, 1> const & m1) noexcept {
-    double out = 0.0;
-    for (std::size_t i = 0; i < v1.size(); ++i) {
-        out += v1[i] * m1[i][0];
-    }
-    return out;
-}
-
 } // namespace BP
