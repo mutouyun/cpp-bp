@@ -28,15 +28,11 @@ M Fn(F&& f, M const & x) noexcept {
     return out;
 }
 
-inline double mean(double x) noexcept {
-    return x;
-}
-
 template <typename M>
-double mean(M const & x) {
-    double out = 0.0;
+auto mean(M const & x) {
+    std::remove_cv_t<std::remove_reference_t<decltype(x[0])>> out {};
     for (std::size_t i = 0; i < x.size(); ++i) {
-        out += mean(x[i]);
+        out += x[i];
     }
     return out / x.size();
 }
