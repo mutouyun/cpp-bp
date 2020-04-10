@@ -20,16 +20,13 @@ int main(void) {
         vector_t { 1, 0, 0, 1 }  // XNOR
     };
 
-    network<
-        matrix_t<3, 3>, // W2
-        matrix_t<3, 4>  // W1
-    > n;
+    network_t<3, 3, 4> n;
     std::cout << n << std::endl;
 
     for (int i = 0; i < 1000; ++i) {
         n.train(X, Y);
         if (i % 100 == 0) {
-            std::cout << mean( Fn(BP::abs, network<>::train(n.predict(X), Y)) ) << std::endl;
+            std::cout << mean( Fn(BP::abs, error_of(n.predict(X), Y)) ) << std::endl;
         }
     }
 

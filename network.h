@@ -79,4 +79,26 @@ std::ostream& operator<<(std::ostream& out, network<Mtx, Mtxes...> const & n) {
                << "W" << sizeof...(Mtxes) + 1 << " = " << n.W() << std::endl;
 }
 
+template <class Network, std::size_t... N>
+struct network_helper;
+
+template <class... M, std::size_t N1, std::size_t N2>
+struct network_helper<network<M...>, N1, N2> {
+    using type = network<M..., matrix_t<N1, N2>>;
+};
+
+template <class... M, std::size_t N1, std::size_t N2, std::size_t N3, std::size_t... N>
+struct network_helper<network<M...>, N1, N2, N3, N...> {
+    using join = typename network_helper<network<M...>, N1, N2>::type;
+    using type = typename network_helper<join, N2, N3, N...>::type;
+};
+
+template <std::size_t... N>
+using network_t = typename network_helper<network<>, N...>::type;
+
+template <typename T>
+auto error_of(T const & X, T const & Y) noexcept {
+    return network<>::train(X, Y);
+}
+
 } // namespace BP
