@@ -62,9 +62,8 @@ public:
     template <std::size_t M_, std::size_t N_>
     auto train(Mtx<M_, N_> const & X, Mtx<1, M_> const & Y) {
         auto L = sigmoid(dot(X, W_));
-        auto E = base_t::train(L, Y);
-        auto D = E * sigmoid_d(L);
-        auto R = dot(D, ~W_);
+        auto D = base_t::train(L, Y); // cross-entropy
+        auto R = dot(D, ~W_) * sigmoid_d(X);
         W_ += dot(~X, D);
         return R;
     }

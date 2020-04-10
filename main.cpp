@@ -23,9 +23,9 @@ int main(void) {
     > n;
     std::cout << n << std::endl;
 
-    for (int i = 0; i < 10000; ++i) {
+    for (int i = 0; i < 1000; ++i) {
         n.train(X, Y);
-        if (i % 1000 == 0) {
+        if (i % 100 == 0) {
             std::cout << mean( Fn(BP::abs, network<>::train(n.predict(X), Y)) ) << std::endl;
         }
     }
