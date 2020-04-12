@@ -180,8 +180,8 @@ template <std::size_t M, std::size_t N, std::size_t O>
 matrix_t<M, O> dot(matrix_t<M, N> const & m1, matrix_t<N, O> const & m2) noexcept {
     matrix_t<M, O> out;
     for (std::size_t m = 0; m < m1.size(); ++m) {
-        for (std::size_t o = 0; o < out[m].size(); ++o) {
-            for (std::size_t n = 0; n < m2.size(); ++n) {
+        for (std::size_t n = 0; n < m2.size(); ++n) {
+            for (std::size_t o = 0; o < out[m].size(); ++o) {
                 out[m][o] += m1[m][n] * m2[n][o];
             }
         }
@@ -203,8 +203,8 @@ matrix_t<M, N> dot(matrix_t<M, 1> const & m1, vector_t<N> const & v1) noexcept {
 template <std::size_t N, std::size_t O>
 vector_t<O> dot(vector_t<N> const & v1, matrix_t<N, O> const & m1) noexcept {
     vector_t<O> out;
-    for (std::size_t o = 0; o < out.size(); ++o) {
-        for (std::size_t n = 0; n < m1.size(); ++n) {
+    for (std::size_t n = 0; n < m1.size(); ++n) {
+        for (std::size_t o = 0; o < out.size(); ++o) {
             out[o] += v1[n] * m1[n][o];
         }
     }
