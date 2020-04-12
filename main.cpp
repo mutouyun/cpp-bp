@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 
 #include "matrix.h"
 #include "func.h"
@@ -20,15 +21,20 @@ int main(void) {
         vector_t { 1, 0, 0, 1 }  // XNOR
     };
 
-    network_t<3, 3, 4> n;
+    network<3, 3, 4> n;
     std::cout << n << std::endl;
 
-    for (int i = 0; i < 1000; ++i) {
+    auto tp = std::chrono::steady_clock::now();
+    for (int i = 0; i < 10000; ++i) {
         n.train(X, Y);
-        if (i % 100 == 0) {
+        if (i % 1000 == 0) {
             std::cout << mean( Fn(BP::abs, error_of(n.predict(X), Y)) ) << std::endl;
         }
     }
+    std::cout << std::endl << "cost time: "
+              << std::chrono::duration_cast<
+                 std::chrono::milliseconds>(std::chrono::steady_clock::now() - tp).count()
+              << "ms" << std::endl;
 
     std::cout << std::endl;
     std::cout << "predict X: " << n.predict(X) << std::endl;
